@@ -1,9 +1,17 @@
 <?php
 /**
- * Plugin Name: CNC24 Apple Touch Icons
- * Description: Serves common apple-touch-icon*.png files from plugin assets to stop 404s.
- * Version: 1.0.0
- * Author: CNC24
+ * Plugin Name:     CNC24 Apple Touch Icons
+ * Plugin URI:      https://github.com/cvladan/cnc24-apple-touch-icons
+ * Description:     Serves common apple-touch-icon*.png files from plugin assets to stop 404s.
+ * Version:         1.0.0
+ * Author:          Vladan Colovic
+ * Author URI:      https://github.com/cvladan/cnc24-apple-touch-icons
+ * License:         GPL-2.0-or-later
+ * License URI:     http://www.gnu.org/licenses/gpl-2.0.txt
+ * Text Domain:     cnc24-apple-touch-icons
+ * Domain Path:     /languages
+ * Update URI:      false
+ * Requires PHP:    8.0
  */
 
 if (!defined('ABSPATH')) {
