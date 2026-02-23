@@ -70,15 +70,34 @@ function cnc24_ati_serve_icon_if_requested() {
 add_action('init', 'cnc24_ati_serve_icon_if_requested', 0);
 
 function cnc24_ati_customize_site_icon_meta_tags($meta_tags) {
-    if (!is_string($meta_tags) || $meta_tags === '') {
+    $base = home_url('/');
+    $custom_tags = array(
+        '<link rel="apple-touch-icon" sizes="180x180" href="' . esc_url($base . 'apple-touch-icon.png') . '" />',
+        '<link rel="apple-touch-icon-precomposed" href="' . esc_url($base . 'apple-touch-icon-precomposed.png') . '" />',
+    );
+
+    if (is_array($meta_tags)) {
+        $filtered_tags = array();
+        foreach ($meta_tags as $meta_tag) {
+            if (is_string($meta_tag) && preg_match('/rel=["\']apple-touch-icon(?:-precomposed)?["\']/i', $meta_tag)) {
+                continue;
+            }
+            $filtered_tags[] = $meta_tag;
+        }
+        return array_merge($filtered_tags, $custom_tags);
+    }
+
+    if (!is_string($meta_tags)) {
         return $meta_tags;
     }
 
+    if ($meta_tags === '') {
+        return implode("\n", $custom_tags) . "\n";
+    }
+
     $meta_tags = (string) preg_replace('/^[^\n\r]*rel=["\']apple-touch-icon(?:-precomposed)?["\'][^\n\r]*(?:\r?\n)?/mi', '', $meta_tags);
-    $base = home_url('/');
     $meta_tags = rtrim($meta_tags, "\r\n") . "\n";
-    $meta_tags .= '<link rel="apple-touch-icon" sizes="180x180" href="' . esc_url($base . 'apple-touch-icon.png') . '">' . "\n";
-    $meta_tags .= '<link rel="apple-touch-icon-precomposed" href="' . esc_url($base . 'apple-touch-icon-precomposed.png') . '">' . "\n";
+    $meta_tags .= implode("\n", $custom_tags) . "\n";
     return $meta_tags;
 }
 add_filter('site_icon_meta_tags', 'cnc24_ati_customize_site_icon_meta_tags', 10, 1);
