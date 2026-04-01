@@ -2,8 +2,7 @@
 
 This package was generated from:
 
-- `https://www.cnc24.com/wp-content/uploads/2022/04/cnc24-logo.svg`
-- black background
+- `https://www.cnc24.com/wp-content/uploads/2022/06/cropped-Favicon_512.png`
 
 ## What is included
 
@@ -72,7 +71,7 @@ Upload all files from `dist/root-icons/` to your WordPress web root so they are 
 Use:
 
 ```bash
-scripts/generate-icons.sh /path/to/logo.svg dist/root-icons
+scripts/generate-icons.sh /path/to/source-image.png dist/root-icons
 ```
 
 Optional scale:
